@@ -1,0 +1,58 @@
+
+<body>
+
+{{> addStudent}}
+
+</body>
+
+<template name="addStudent">
+    <h1>Add Student Form</h1>
+    <form id="addStudentForm">
+        <div class="form-group">
+            <label>Name:</label>
+            <input class="form-control" type="text" name="name">
+        </div>
+        <div class="form-group" >
+            <label>Email</label>
+            <input class="form-control" type="text" name="email">
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="gender" value="Male">
+                Male
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="gender" value="Female">
+                Female
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Course</label>
+            <select class="form-control" id="course" name="course">
+                <option value="">
+                    Select
+                </option>
+                <option>
+                    BCA
+                </option>
+                <option>
+                    MCA
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="alterEgo">Subjects</label>
+            <br/>
+
+
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</template>
+
