@@ -16,9 +16,56 @@ Template.addStudent.events({
             name: event.target.email.value,
             course: event.target.course.value,
             gender: event.target.gender.value,
+            userId:Meteor.userId()
         }
-        let id = Student.insert(student);
-console.log("submitted...",id);
+        let id = Meteor.call('insertStudent',student,(e,data)=>{
+                console.log("submitted...",data);
+
+});
+        // let id = Student.insert(student);
 event.preventDefault();
 }
 });
+
+
+
+Template.studentList.helpers({
+    students: ()=> Student.find()
+});
+
+Template.register.events({
+        'submit #registrationForm': (event)=> {
+        let userInfo = {
+            email: event.target.email.value,
+            password: event.target.password.value
+        };
+        Accounts.createUser(userInfo,()=>{
+            FlowRouter.go('home');
+        });
+        event.preventDefault();
+    }
+});
+
+
+
+Template.login.events({
+        'submit #loginForm': (event)=> {
+        let emailVar = event.target.email.value,
+        passwordVar = event.target.password.value;
+    Meteor.loginWithPassword(emailVar, passwordVar,()=>{
+        FlowRouter.go('home');
+    });
+    event.preventDefault();
+}
+});
+
+Template.menu.events({
+    'click .logout': function (event) {
+        event.preventDefault();
+        Meteor.logout(function () {
+            FlowRouter.go('/login');
+        });
+
+    }
+});
+

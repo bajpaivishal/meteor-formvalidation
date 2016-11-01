@@ -1,10 +1,22 @@
 
 <body>
 
-{{> addStudent}}
+    {{> Template.dynamic template=top}}
+    {{> Template.dynamic template=main}}
 
 </body>
 
+<template name="menu">
+    {{#if currentUser}}
+        <a href="/">Home</a>
+        <a href="/list">List</a>
+        <a href="#" class="logout">logout</a>
+    {{else}}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {{/if}}
+
+</template>
 <template name="addStudent">
     <h1>Add Student Form</h1>
     <form id="addStudentForm">
@@ -47,12 +59,50 @@
         </div>
 
         <div class="form-group">
-            <label for="alterEgo">Subjects</label>
             <br/>
-
-
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </template>
+<template name="studentList">
+    <ul>
+    {{#each students}}
+       <li> {{name}} </li>
+     {{else}}
+        No Record Found.
+    {{/each}}
+    </ul>
+</template>
 
+<template name="login">
+    <form id="loginForm">
+        <div class="form-group">
+            <label>Email:</label>
+            <input class="form-control" type="text" name="email">
+        </div>
+        <div class="form-group" >
+            <label>Password</label>
+            <input class="form-control" type="password" name="password">
+        </div>
+        <div class="form-group" >
+            <button type="submit" class="btn ">Login</button>
+        </div>
+    </form>
+</template>
+
+
+<template name="register">
+    <form id="registrationForm">
+        <div class="form-group">
+            <label>Email:</label>
+            <input class="form-control" type="text" name="email">
+        </div>
+        <div class="form-group" >
+            <label>Password</label>
+            <input class="form-control" type="password" name="password">
+        </div>
+        <div class="form-group" >
+            <button type="submit" class="btn ">Register</button>
+        </div>
+    </form>
+</template>
