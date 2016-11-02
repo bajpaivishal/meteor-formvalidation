@@ -2,8 +2,10 @@ import { Meteor } from 'meteor/meteor';
 
 import {Student} from '../imports/api/student';
 
-Meteor.publish('students', function(id) {
-    return Student.find({userId:id});
+Meteor.publish('student', function(id) {
+    let find = {};
+    if(id) find.userId = id;
+    return Student.find(find);
 });
 
 Meteor.startup(() => {
