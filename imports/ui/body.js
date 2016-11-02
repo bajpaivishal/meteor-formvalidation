@@ -32,6 +32,11 @@ event.preventDefault();
 Template.studentList.helpers({
     students: ()=> Student.find()
 });
+Template.studentList.onCreated(function () {
+    var self = this;
+    self.subscribe("student",Meteor.userId());
+});
+
 
 Template.register.events({
         'submit #registrationForm': (event)=> {
