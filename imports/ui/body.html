@@ -1,12 +1,12 @@
 
 <body>
-
     {{> Template.dynamic template=top}}
     {{> Template.dynamic template=main}}
 
 </body>
 
 <template name="menu">
+
     {{#if currentUser}}
         <a href="/">Home</a>
         <a href="/list">List</a>
@@ -15,10 +15,12 @@
         <a href="/login">Login</a>
         <a href="/register">Register</a>
     {{/if}}
+    {{> flashMessages}}
 
 </template>
 <template name="addStudent">
     <h1>Add Student Form</h1>
+
     <form id="addStudentForm">
         <div class="form-group">
             <label>Name:</label>

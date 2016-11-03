@@ -4,7 +4,6 @@ import {Student} from '../api/student';
 import './body.html';
 
 Template.addStudent.onCreated(function addStudentOnCreated() {
-
 });
 
 Template.addStudent.helpers({});
@@ -18,8 +17,16 @@ Template.addStudent.events({
             gender: event.target.gender.value,
             userId:Meteor.userId()
         }
-        let id = Meteor.call('insertStudent',student,(e,data)=>{
-                console.log("submitted...",data);
+        // StudentSchema.validate(student);
+        let id = Meteor.call('insertStudent',student,(err,data)=>{
+                if(err){
+                    console.log("submitted...", data);
+                    FlashMessages.sendError("oops !! Something went wrong.", { hideDelay: 2000 });
+                }else{
+                    FlashMessages.sendSuccess("Student Info added successfuly.", { hideDelay: 2000 });
+                    FlowRouter.go('/list');
+                    // console.log("submitted...", data);
+                }
 
 });
         // let id = Student.insert(student);
@@ -45,6 +52,7 @@ Template.register.events({
             password: event.target.password.value
         };
         Accounts.createUser(userInfo,()=>{
+            FlashMessages.sendSuccess("User registered successfuly.", { hideDelay: 2000 });
             FlowRouter.go('home');
         });
         event.preventDefault();
@@ -57,8 +65,14 @@ Template.login.events({
         'submit #loginForm': (event)=> {
         let emailVar = event.target.email.value,
         passwordVar = event.target.password.value;
-    Meteor.loginWithPassword(emailVar, passwordVar,()=>{
-        FlowRouter.go('home');
+    Meteor.loginWithPassword(emailVar, passwordVar,(err,data)=>{
+        if(err){
+            FlashMessages.sendError("oops !! Something went wrong.", { hideDelay: 2000 });
+        }else{
+            FlashMessages.sendSuccess("User Loggin successfuly.", { hideDelay: 2000 });
+            FlowRouter.go('home');
+        }
+
     });
     event.preventDefault();
 }
@@ -68,6 +82,7 @@ Template.menu.events({
     'click .logout': function (event) {
         event.preventDefault();
         Meteor.logout(function () {
+            FlashMessages.sendSuccess("Logged-out successfuly", { hideDelay: 2000 });
             FlowRouter.go('/login');
         });
 
