@@ -17,6 +17,7 @@ StudentSchema = new SimpleSchema({
     },
     gender: {
         type: String,
+        allowedValues: ["Male", "Female"]
     },
     userId: {
         type: String,
@@ -33,6 +34,25 @@ Student.attachSchema(StudentSchema);
 
 Meteor.methods({
     'insertStudent': function (student) {
+        console.log(student,"<><><><><><>")
+
         return Student.insert(student);
+    },
+    'findOneStudent': function (id) {
+        console.log(id,"<><><><><><>")
+        return Student.find(id);
+    },
+    'updateStudent': function (student,id) {
+        console.log(id,student,"<><><><><><>")
+        return Student.update({_id:id},{ $set: student});
+    },
+});
+
+Student.allow({
+    insert: function(userID, doc){
+        return !!userID;
+    },
+    update: function(userID, doc){
+        return !!userID;
     }
 });

@@ -10,3 +10,5 @@ client site validation http://jsfiddle.net/chicagogrooves/y18er7wr/
 https://github.com/jagi/meteor-reactive-map
 
 meteor add mrt:flash-messages
+
+http://autoform.meteorapp.com/quickform

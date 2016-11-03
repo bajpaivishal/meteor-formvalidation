@@ -20,8 +20,17 @@
 </template>
 <template name="addStudent">
     <h1>Add Student Form</h1>
-
-    <form id="addStudentForm">
+    {{#autoForm collection="Student" id="addStudentForm" type="insert"}}
+        <fieldset>
+            <legend>Add a Student</legend>
+            {{> afQuickField name='name'}}
+            {{> afQuickField name='email'}}
+            {{> afQuickField name='gender' type="select-radio" options=gender}}
+            {{> afQuickField name='course' firstOption="(Select Something)" options=course}}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Insert</button>
+    {{/autoForm}}
+    <!--<form id="addStudentForm">
         <div class="form-group">
             <label>Name:</label>
             <input class="form-control" type="text" name="name">
@@ -64,12 +73,27 @@
             <br/>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+    </form>-->
 </template>
+
+<template name="editStudent">
+    <h1>Edit Student Form</h1>
+    {{#autoForm collection="Student" id="editStudentForm" type="update" doc=student}}
+        <fieldset>
+            <legend>Edit a Student</legend>
+            {{> afQuickField name='name'}}
+            {{> afQuickField name='email'}}
+            {{> afQuickField name='gender' type="select-radio" options=gender}}
+            {{> afQuickField name='course' firstOption="(Select Something)" options=course}}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Insert</button>
+    {{/autoForm}}
+</template>
+
 <template name="studentList">
     <ul>
     {{#each students}}
-       <li> {{name}} </li>
+       <li> {{name}} <a href="/edit/{{_id}}">Edit</a></li>
      {{else}}
         No Record Found.
     {{/each}}
