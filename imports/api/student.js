@@ -1,23 +1,23 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-
-export const Student = new Mongo.Collection('students');
+Student = new Mongo.Collection('students');
 
 StudentSchema = new SimpleSchema({
     name: {
         type: String,
-        max: 200
+        max: 8
     },
     email: {
         type: String,
+        regEx: SimpleSchema.RegEx.Email,
+        unique: true
     },
     course: {
         type: String,
     },
     gender: {
         type: String,
-        allowedValues: ["Male", "Female"]
     },
     userId: {
         type: String,
@@ -29,8 +29,12 @@ StudentSchema = new SimpleSchema({
      type: String
      }*/
 });
+SimpleSchema.messages({
+    regEx: [
+        {exp: SimpleSchema.RegEx.Email, msg: "[label] must... be a valid e-mail address"},
+    ]
+});
 Student.attachSchema(StudentSchema);
-
 
 Meteor.methods({
     'insertStudent': function (student) {

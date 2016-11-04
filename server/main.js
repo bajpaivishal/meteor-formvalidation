@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-import {Student} from '../imports/api/student';
+import  '../imports/api/student';
 
 Meteor.publish('student', function(id) {
     let find = {};

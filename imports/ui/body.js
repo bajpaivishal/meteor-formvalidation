@@ -1,54 +1,5 @@
 import {Template} from 'meteor/templating';
-// import {Student} from '../api/student';
-// import  '../api/student';
-
-/*Meteor.methods({
-    'insertStudent': function (student) {
-        console.log(student,"<><><><><><>")
-
-        return Student.insert(student);
-    },
-    'findOneStudent': function (id) {
-        console.log(id,"<><><><><><>")
-        return Student.find(id);
-    },
-});*/
-Student = new Mongo.Collection('students');
-
-StudentSchema = new SimpleSchema({
-    name: {
-        type: String,
-        max: 8
-    },
-    email: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Email,
-        unique: true
-    },
-    course: {
-        type: String,
-    },
-    gender: {
-        type: String,
-    },
-    userId: {
-        type: String,
-    },/*,
-     subjects: {
-     type: Array
-     },
-     "subjects.$": {
-     type: String
-     }*/
-});
-SimpleSchema.messages({
-    regEx: [
-        {exp: SimpleSchema.RegEx.Email, msg: "[label] must... be a valid e-mail address"},
-    ]
-});
-Student.attachSchema(StudentSchema);
-
-
+import  '../api/student';
 import './body.html';
 
 Template.addStudent.onCreated(function addStudentOnCreated() {
@@ -197,11 +148,9 @@ Template.editStudent.events({
                 }else{
                     FlashMessages.sendSuccess("Student Info Updated successfuly.", { hideDelay: 2000 });
 FlowRouter.go('/list');
-// console.log("submitted...", data);
 }
 
 });
-// let id = Student.insert(student);
 event.preventDefault();
 }
 });
