@@ -89,16 +89,26 @@ Template.addStudent.events({
                     // console.log("submitted...", data);
                 }
 
-});
+            });
         // let id = Student.insert(student);
-event.preventDefault();
-}
-});
+        event.preventDefault();
+        }
+
+},
+
+);
 
 
 
 Template.studentList.helpers({
     students: ()=> Student.find()
+});
+
+Template.studentList.events({
+    'click .remove': function (event,instance) {
+        console.log(this._id,"<<")
+        Meteor.call('deleteStudent',this._id);
+    }
 });
 Template.studentList.onCreated(function () {
     var self = this;

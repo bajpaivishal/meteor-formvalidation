@@ -93,7 +93,11 @@
 <template name="studentList">
     <ul>
     {{#each students}}
-       <li> {{name}} <a href="/edit/{{_id}}">Edit</a></li>
+       <li>
+           {{name}}
+       <a href="/edit/{{_id}}">Edit</a>
+       <a href="#" class="remove">Delete</a>
+       </li>
      {{else}}
         No Record Found.
     {{/each}}

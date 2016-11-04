@@ -46,6 +46,10 @@ Meteor.methods({
         console.log(id,student,"<><><><><><>")
         return Student.update({_id:id},{ $set: student});
     },
+    'deleteStudent': function (id) {
+        // console.log(id,student,"<><><><><><>")
+        return Student.remove({_id:id});
+    }
 });
 
 Student.allow({
@@ -53,6 +57,9 @@ Student.allow({
         return !!userID;
     },
     update: function(userID, doc){
+        return !!userID;
+    },
+    remove: function(userID, doc){
         return !!userID;
     }
 });
